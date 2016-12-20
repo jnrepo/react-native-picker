@@ -37,7 +37,8 @@ export default class PickerAny extends Component {
 		selectedValue: PropTypes.any.isRequired,
 		onPickerDone: PropTypes.func,
 		onPickerCancel: PropTypes.func,
-		onValueChange: PropTypes.func
+		onValueChange: PropTypes.func,
+    isPickerShown: PropTypes.func
 	};
 
 	static defaultProps = {
@@ -134,6 +135,7 @@ export default class PickerAny extends Component {
 			if(evt.finished) {
 				this._isMoving = false;
 				this._isPickerShow = true;
+        typeof this.props.isPickerShown === 'function' && this.props.isPickerShown(true)
 			}
 		});
 	}
@@ -150,6 +152,7 @@ export default class PickerAny extends Component {
 			if(evt.finished) {
 				this._isMoving = false;
 				this._isPickerShow = false;
+        typeof this.props.isPickerShown === 'function' && this.props.isPickerShown(false)
 			}
 		});
 	}
@@ -165,7 +168,7 @@ export default class PickerAny extends Component {
 			this._slideUp();
 		}
 	}
-	
+
 	toggle(){
 		this._toggle();
 	}
